@@ -15,21 +15,64 @@ SHEET = GSPREAD_CLIENT.open_by_key(spreadsheet_id)
 
 
 
+
+def choose_dep():
+    case = input('Enter the department you want to visit?\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
+    dep = ''
+    if case == '1':
+        dep = 'meat'    
+        print('Welcome to the meet department')
+        get_all_columns(SHEET.worksheet(dep))
+    elif case == '2':
+        dep = 'dairy'
+        print('Welcome to the dairy department')
+        get_all_columns(SHEET.worksheet(dep))
+    elif case == '3':
+        dep = 'vegetables'
+        print('Welcome to the vegetables department')
+        get_all_columns(SHEET.worksheet(dep))
+    elif case == '4':
+        dep = 'fruits'
+        print('Welcome to the fruits department')
+        get_all_columns(SHEET.worksheet(dep))
+    elif case == '5':
+        dep = 'candies'
+        print('Welcome to the candies department')
+        get_all_columns(SHEET.worksheet(dep))
+    else:
+        print('Please enter a valid department')
+        
+    
+
+
+
+
+
+
+
+
+
 def get_all_columns(sheet):
+    
     # Get all data from the sheet
     data = sheet.get_all_values()
     
     # Transpose the data to get columns as lists
     columns = list(zip(*data))
     
-    return columns
+    print(columns)
 
 # Get all columns from the "goods" worksheet
-all_columns = get_all_columns(SHEET.worksheet("goods"))
+    
+    
+def main ():
+    print('Welcome to Grocery Store!\n')
+    choose_dep()
+    
+main()
+    
 
-# Example: Print all columns
-for i, col in enumerate(all_columns, start=1):
-    print(col)
+            
 
     
 
