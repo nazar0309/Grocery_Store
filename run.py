@@ -33,24 +33,28 @@ def choose_dep():
         show_dep(dep)
     else:
         print('Please enter a valid department')
-
+ 
 def show_dep(dep):
-    print(f'Welcome to the {dep} department')
-    print('Here is a selection of our products:\n')
-    columns = get_all_columns(SHEET.worksheet(dep))
-    if columns:
-        # Assuming the first row contains headers
-        headers = columns[0]
-        products = columns[1:]  # Skip headers
+    try:
+        print(f'Welcome to the {dep} department')
+        print('Here is a selection of our products:\n')
+        columns = get_all_columns(SHEET.worksheet(dep))
+        if columns:
+            # Assuming the first row contains headers
 
-        for product in products:
-            name = product[0]
-            quantity = product[1]
-            price = product[2]
-            print(f'{name}  quantity: {quantity}  price: {price} EUR')
-    else:
-        print(f'No data available for the {dep} department.')
-    print()
+            print('Product  |  quantity  |  price:\n')
+            for product in columns:
+                name = product[0]
+                quantity = product[1]
+                price = product[2]
+                print(f'{name}  |  {quantity}  |  {price} €')
+        
+        else:
+            print(f'No data available for the {dep} department.')
+        print()
+    except gspread.exceptions.WorksheetNotFound:
+        print(f'The department "{dep}" was not found. Please check the name and try again.')
+       
 
 def get_all_columns(sheet):
     try:
@@ -64,6 +68,10 @@ def get_all_columns(sheet):
     except Exception as e:
         print(f"Error retrieving data from sheet: {e}")
         return None
+
+
+    
+    
 
 def main():
     print('Welcome to Grocery Store!\n')
