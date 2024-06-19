@@ -15,7 +15,7 @@ SHEET = GSPREAD_CLIENT.open_by_key(spreadsheet_id)
 
 # Customer class for handling cash and payment
 class Customer:
-    cash = 30  # Initial cash amount for demonstration
+    cash = 300  # Initial cash amount for demonstration
     def __init__(self, name, price):
         self.name = name
         self.price = price
@@ -25,7 +25,7 @@ class Customer:
             self.__class__.cash -= self.price
             print(f'You have paid {self.price} €. You have {self.cash} € left.\n')
         else:
-            print('You do not have enough money to pay for your cart. Please remove some items.')
+            print('You do not have enough money to pay for your cart.')
 
 # Function to choose department and show products
 def choose_dep(case=None):
@@ -117,15 +117,58 @@ def checkout(cart, price):
         print(item)
     print()
     print(f'Total price: {price} €\n')
+    
     nazar = Customer('Nazar', price)
     nazar.pay()
     print('Thank you for shopping with us!')
+    find_sheet(cart)
     print('Would you like to continue shopping?\n')
     i = input('1. Yes\n2. No\n')
     if i == '1':
         choose_dep()
     else:
         print('Goodbye!')
+
+
+            
+def find_sheet(cart):
+    for item in cart:
+        try:
+            product_name, unit, quantity = item.split()  # Unpack item into product_name, unit, quantity
+            title = product_name + ' ' + unit
+        except ValueError:
+            print(f"Invalid format for item: {item}")
+            continue
+        
+        # Flag to track if product was found in any worksheet
+        product_found = False
+        
+        # Iterate through all worksheets in the spreadsheet
+        for sheet in SHEET.worksheets():
+            try:
+                # Find the cell containing the product name
+                cell = sheet.find(title)
+                if cell is not None:
+                
+                    # Update the quantity in the next column (assuming quantity is in next column)
+                    sheet.update_cell(cell.row + 1, cell.col, quantity)
+                
+                    # Print message indicating product quantity update
+                    print(f"Updated {product_name} quantity to {quantity} in the '{sheet.title}' worksheet.")
+                
+                    #Set flag indicating product was found and updated
+                    product_found = True
+                    break
+            except gspread.exceptions.APIError as e:
+                # Handle specific API errors
+                print(f"API error occurred: {e}")
+        
+        # If product was not found in any worksheet, print a message
+        if not product_found:
+            print(f"Product '{product_name}' not found in any worksheet.")
+
+
+      
 
 # Function to retrieve all columns from a Google Sheet worksheet
 def get_all_columns(sheet):
