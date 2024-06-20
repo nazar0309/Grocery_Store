@@ -121,7 +121,7 @@ def checkout(cart, price):
     nazar = Customer('Nazar', price)
     nazar.pay()
     print('Thank you for shopping with us!')
-    find_sheet(cart)
+    update_sheet(cart)
     print('Would you like to continue shopping?\n')
     i = input('1. Yes\n2. No\n')
     if i == '1':
@@ -131,7 +131,7 @@ def checkout(cart, price):
 
 
             
-def find_sheet(cart):
+def update_sheet(cart):
     for item in cart:
         try:
             product_name, unit, quantity = item.split()  # Unpack item into product_name, unit, quantity
@@ -182,11 +182,44 @@ def get_all_columns(sheet):
 
 # Main function to start the program
 def main():
+    print('''      
+                    
+██╗    ██╗  ███████╗  ██╗      ██████╗    ██████╗     ███╗   ███╗   ████████
+██║    ██║  ██╔════╝  ██║      ██╔════╝  ███╔═████╗   ████╗ ████║   ██╔════╝
+██║ █╗ ██║  ███████╗  ██║      ██║       ███║██╔██║   ██╔████╔██║   █████╗
+██║███╗██║  ██╔════╝  ██║      ██║       █████╔╝██║   ██║╚██╔╝██║   ██╔══╝
+╚███╔███╔╝  ███████╗  ███████╗ ╚██████╗   ███████╔╝   ██║ ╚═╝ ██║   ███████╗
+ ╚══╝╚══╝   ╚══════╝  ╚══════╝  ╚═════╝    ╚═════╝    ╚═╝     ╚═╝   ╚══════╝
+ 
+         ████████╗   ██████╗           ████████╗  ██╗   ██╗   ████████
+         ╚══██╔══╝  ██╔═████╗          ╚══██╔══╝  ██║   ██║   ██╔════╝
+            ██║     ██║██╔██║             ██║     ████████║   █████╗
+            ██║     ████╔╝██║             ██║     ██║   ██║   ██╔══╝
+            ██║     ╚██████╔╝             ██║     ██║   ██║   ███████╗
+            ╚═╝      ╚═════╝              ╚═╝     ╚═╝   ╚═╝   ╚══════╝
+      
+ ██████╗     ██████╗     ██████╗      ██████╗     ████████    ██████╗     ██╗   ██╗ 
+ ██╔═══╝     ██╔══██╗   ███╔═████╗    ██╔════╝    ██╔════╝    ██╔══██╗    ██║   ██║
+ ██║  ███╗   ██████╔╝   ███║██╔██║    ██║         █████╗      ██████╔╝    ╚██╗ ██╔╝
+ ██║   ██║   ██╔══██╗   █████╔╝██║    ██║         ██╔══╝      ██╔══██╗     ╚████╔╝ 
+ ╚██████╔╝   ██║  ██║    ███████╔╝    ╚██████╗    ███████╗    ██║  ██║      ╚██╔╝    
+  ╚═════╝    ╚═╝  ╚═╝     ╚═════╝      ╚═════╝    ╚══════╝    ╚═╝  ╚═╝       ██║   
+                                                                             ╚═╝
+          
+          ███████╗     ████████╗     ██████╗      ██████╗     ████████
+          ██╔════╝     ╚══██╔══╝    ███╔═████╗    ██╔══██╗    ██╔════╝
+          ███████╗        ██║       ███║██╔██║    ██████╔╝    █████╗
+          ╚════██║        ██║       █████╔╝██║    ██╔══██╗    ██╔══╝
+          ███████║        ██║        ███████╔╝    ██║  ██║    ███████╗
+          ╚══════╝        ╚═╝         ╚═════╝     ╚═╝  ╚═╝    ╚══════╝
+          
+          ''')
     name = input('Please enter your name\n')
-    print(f'Welcome to Grocery Store, {name}! Explore our departments')
+
+
+    print(f'Hello,{name}! Here you can explore our departments')
     print('and add items to your cart. When you\'re ready,')
     print('you can proceed to checkout. If you need to')
-    print('quit, simply type "QUIT" as your input.')
     case = input('Please, enter the department you want to visit\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
     choose_dep(case)
 
