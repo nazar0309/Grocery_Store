@@ -27,6 +27,41 @@ class Customer:
         else:
             print('You do not have enough money to pay for your cart.')
 
+
+def welcome():
+    print('''      
+                    
+██╗    ██╗  ███████╗  ██╗      ██████╗    ██████╗     ███╗   ███╗   ████████
+██║    ██║  ██╔════╝  ██║      ██╔════╝  ███╔═████╗   ████╗ ████║   ██╔════╝
+██║ █╗ ██║  ███████╗  ██║      ██║       ███║██╔██║   ██╔████╔██║   █████╗
+██║███╗██║  ██╔════╝  ██║      ██║       █████╔╝██║   ██║╚██╔╝██║   ██╔══╝
+╚███╔███╔╝  ███████╗  ███████╗ ╚██████╗   ███████╔╝   ██║ ╚═╝ ██║   ███████╗
+ ╚══╝╚══╝   ╚══════╝  ╚══════╝  ╚═════╝    ╚═════╝    ╚═╝     ╚═╝   ╚══════╝
+ 
+        ████████╗    ██████╗          ████████╗   ██╗   ██╗    ████████
+        ╚══██╔══╝   ███╔═████╗        ╚══██╔══╝   ██║   ██║    ██╔════╝
+           ██║      ███║██╔██║           ██║      ████████║    █████╗
+           ██║      ███║██╔██║           ██║      ██║   ██║    ██╔══╝
+           ██║       ███████╔╝           ██║      ██║   ██║    ███████╗
+           ╚═╝        ╚═════╝            ╚═╝      ╚═╝   ╚═╝    ╚══════╝                       
+ 
+      
+ ██████╗     ██████╗     ██████╗      ██████╗     ████████    ██████╗     ██╗   ██╗ 
+ ██╔═══╝     ██╔══██╗   ███╔═████╗    ██╔════╝    ██╔════╝    ██╔══██╗    ██║   ██║
+ ██║  ███╗   ██████╔╝   ███║██╔██║    ██║         █████╗      ██████╔╝    ╚██╗ ██╔╝
+ ██║   ██║   ██╔══██╗   █████╔╝██║    ██║         ██╔══╝      ██╔══██╗     ╚████╔╝ 
+ ╚██████╔╝   ██║  ██║    ███████╔╝    ╚██████╗    ███████╗    ██║  ██║      ╚██╔╝    
+  ╚═════╝    ╚═╝  ╚═╝     ╚═════╝      ╚═════╝    ╚══════╝    ╚═╝  ╚═╝       ██║   
+                                                                             ╚═╝
+          
+          ███████╗     ████████╗     ██████╗      ██████╗     ████████
+          ██╔════╝     ╚══██╔══╝    ███╔═████╗    ██╔══██╗    ██╔════╝
+          ███████╗        ██║       ███║██╔██║    ██████╔╝    █████╗
+          ╚════██║        ██║       █████╔╝██║    ██╔══██╗    ██╔══╝
+          ███████║        ██║        ███████╔╝    ██║  ██║    ███████╗
+          ╚══════╝        ╚═╝         ╚═════╝     ╚═╝  ╚═╝    ╚══════╝
+          
+          ''')
 # Function to choose department and show products
 def choose_dep(case=None):
     if not case:
@@ -149,12 +184,14 @@ def update_sheet(cart):
                 # Find the cell containing the product name
                 cell = sheet.find(title)
                 if cell is not None:
-                
-                    # Update the quantity in the next column (assuming quantity is in next column)
-                    sheet.update_cell(cell.row + 1, cell.col, quantity)
+                    current_quantity = sheet.cell(cell.row + 1, cell.col).value
+                    new_quantity = int(current_quantity) - int(quantity)
+                    # Update the quantity in the next column (assuming quantity is in the next column)
+                    sheet.update_cell(cell.row + 1, cell.col, new_quantity)
+                    # Update the quantity in the next column (assuming 
                 
                     # Print message indicating product quantity update
-                    print(f"Updated {product_name} quantity to {quantity} in the '{sheet.title}' worksheet.")
+                    print(f"Updated {product_name} quantity to {new_quantity} in the '{sheet.title}' worksheet.")
                 
                     #Set flag indicating product was found and updated
                     product_found = True
@@ -182,41 +219,8 @@ def get_all_columns(sheet):
 
 # Main function to start the program
 def main():
-    print('''      
-                    
-██╗    ██╗  ███████╗  ██╗      ██████╗    ██████╗     ███╗   ███╗   ████████
-██║    ██║  ██╔════╝  ██║      ██╔════╝  ███╔═████╗   ████╗ ████║   ██╔════╝
-██║ █╗ ██║  ███████╗  ██║      ██║       ███║██╔██║   ██╔████╔██║   █████╗
-██║███╗██║  ██╔════╝  ██║      ██║       █████╔╝██║   ██║╚██╔╝██║   ██╔══╝
-╚███╔███╔╝  ███████╗  ███████╗ ╚██████╗   ███████╔╝   ██║ ╚═╝ ██║   ███████╗
- ╚══╝╚══╝   ╚══════╝  ╚══════╝  ╚═════╝    ╚═════╝    ╚═╝     ╚═╝   ╚══════╝
- 
-         ████████╗   ██████╗           ████████╗  ██╗   ██╗   ████████
-         ╚══██╔══╝  ██╔═████╗          ╚══██╔══╝  ██║   ██║   ██╔════╝
-            ██║     ██║██╔██║             ██║     ████████║   █████╗
-            ██║     ████╔╝██║             ██║     ██║   ██║   ██╔══╝
-            ██║     ╚██████╔╝             ██║     ██║   ██║   ███████╗
-            ╚═╝      ╚═════╝              ╚═╝     ╚═╝   ╚═╝   ╚══════╝
-      
- ██████╗     ██████╗     ██████╗      ██████╗     ████████    ██████╗     ██╗   ██╗ 
- ██╔═══╝     ██╔══██╗   ███╔═████╗    ██╔════╝    ██╔════╝    ██╔══██╗    ██║   ██║
- ██║  ███╗   ██████╔╝   ███║██╔██║    ██║         █████╗      ██████╔╝    ╚██╗ ██╔╝
- ██║   ██║   ██╔══██╗   █████╔╝██║    ██║         ██╔══╝      ██╔══██╗     ╚████╔╝ 
- ╚██████╔╝   ██║  ██║    ███████╔╝    ╚██████╗    ███████╗    ██║  ██║      ╚██╔╝    
-  ╚═════╝    ╚═╝  ╚═╝     ╚═════╝      ╚═════╝    ╚══════╝    ╚═╝  ╚═╝       ██║   
-                                                                             ╚═╝
-          
-          ███████╗     ████████╗     ██████╗      ██████╗     ████████
-          ██╔════╝     ╚══██╔══╝    ███╔═████╗    ██╔══██╗    ██╔════╝
-          ███████╗        ██║       ███║██╔██║    ██████╔╝    █████╗
-          ╚════██║        ██║       █████╔╝██║    ██╔══██╗    ██╔══╝
-          ███████║        ██║        ███████╔╝    ██║  ██║    ███████╗
-          ╚══════╝        ╚═╝         ╚═════╝     ╚═╝  ╚═╝    ╚══════╝
-          
-          ''')
-    name = input('Please enter your name\n')
-
-
+    welcome()
+    name = input('Please, enter your name\n')
     print(f'Hello,{name}! Here you can explore our departments')
     print('and add items to your cart. When you\'re ready,')
     print('you can proceed to checkout. If you need to')
