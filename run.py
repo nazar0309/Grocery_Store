@@ -15,7 +15,8 @@ SHEET = GSPREAD_CLIENT.open_by_key(spreadsheet_id)
 
 # Customer class for handling cash and payment
 class Customer:
-    cash = 300  # Initial cash amount for demonstration
+   # Initial cash amount for demonstration
+    cash = 0
     def __init__(self, name, price):
         self.name = name
         self.price = price
@@ -101,12 +102,7 @@ def show_dep(dep):
                 price = product[2]
                 print(f'{idx}. {name}  |  {quantity}  |  {price} €')
             print('')
-            print('Would you like to add any of these products to your cart?\n')
-            i = input('1. Yes\n2. No, I want to choose a different department\n')
-            if i == '1':
-                add_to_cart(columns)
-            else:
-                choose_dep()
+            choice_1(columns)
         else:
             print(f'No data available for the {dep} department.')
         print()
@@ -116,7 +112,17 @@ def show_dep(dep):
 # Cart and price tracking
 cart = []
 price = 0
-
+def choice_1(columns):
+    print('Would you like to add any of these products to your cart?\n')
+    i = input('1. Yes\n2. No, I want to choose a different department\n')
+    if i == '1':
+        add_to_cart(columns)
+    elif i == '2':
+        choose_dep()
+    else:
+        print('Please enter a valid number')
+        choice_1(columns)
+    
 # Function to add products to cart
 def add_to_cart(columns):
     product = int(input('Please enter the number of the product you want to add to your cart\n')) - 1
@@ -133,18 +139,30 @@ def add_to_cart(columns):
     global price 
     price += y * amount
     print(f'{z} has been added to your cart')
+    choice_2(columns)
+    
+def choice_2(columns): 
     print('Would you like to add more products to your cart from this department?\n')
     i = input('1. Yes\n2. No\n')
     if i == '1':
         add_to_cart(columns)
-    else:
-        print('Do you want to proceed to checkout?\n')
-        a = input('1. Yes\n2. No, I want to choose another department\n')
-        if a == '1':
-            checkout(cart, price)
-        else: 
-            choose_dep()
-
+    elif i == '2':
+        choice_3(columns)
+    else: 
+        print('Please enter a valid number')
+        choice_2(columns)
+        
+def choice_3(columns):
+    print('Do you want to proceed to checkout?\n')
+    a = input('1. Yes\n2. No, I want to choose another department\n')
+    if a == '1':
+        checkout(cart, price)
+    elif a == '2': 
+        choose_dep()
+    else: 
+        print('Please enter a valid number')
+        choice_3(columns)
+    
 # Function to handle checkout process
 def checkout(cart, price):
     print('Your cart contains the following items:\n')
@@ -160,6 +178,7 @@ def checkout(cart, price):
     print('Would you like to continue shopping?\n')
     i = input('1. Yes\n2. No\n')
     if i == '1':
+        cart.clear()
         choose_dep()
     else:
         print('Goodbye!')
@@ -217,10 +236,32 @@ def get_all_columns(sheet):
         print(f"Error retrieving data from sheet: {e}")
         return None
 
+
+
+def validate_name(name):
+        return name.isalpha() and 3 <= len(name) <= 15
+    
+def get_name():
+    name = input('Please, enter your name:\n')
+    if not validate_name(name):
+        print('You have entered invalid name')
+        print('Name should contain only alphabetic symbols and be 3-15 characters long')
+        return get_name()  # Return the result of the recursive call
+    return name
+def get_cash():
+    cash = input('Please, enter the amount of cash you Would like to spend\n')
+    if cash.isdigit():
+        return int(cash)
+    else: 
+        print('You have entered invalid cash amount')
+        return get_cash()      
 # Main function to start the program
 def main():
     welcome()
-    name = input('Please, enter your name\n')
+    name = get_name()
+    cash = get_cash()
+    Customer.cash = int(cash)
+
     print(f'Hello,{name}! Here you can explore our departments')
     print('and add items to your cart. When you\'re ready,')
     print('you can proceed to checkout. If you need to')
