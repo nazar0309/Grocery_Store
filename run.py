@@ -86,6 +86,28 @@ def choose_dep(case=None):
     else:
         print('Please enter a valid department')
         choose_dep()
+def choose_dep_admin(case=None):
+    if not case:
+        case = input('Please, enter the department you want to visit\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
+    dep = ''
+    if case == '1':
+        dep = 'meat'    
+        return dep
+    elif case == '2':
+        dep = 'dairy'
+        return dep
+    elif case == '3':
+        dep = 'vegetables'
+        return dep
+    elif case == '4':
+        dep = 'fruits'
+        return dep
+    elif case == '5':
+        dep = 'candies'
+        return dep
+    else:
+        print('Please enter a valid department')
+        choose_dep()
 
 # Function to display products in a department
 def show_dep(dep):
@@ -330,15 +352,63 @@ def admin_func():
         else:
             print('You have entered an invalid password. Please try again.')
     print('You have successfully logged in!\n')
-    print('Welcome to the admin panel\n')
+    print('Welcome to the admin panel!\nWhat would you like to do?\n')
+    admin_choice()
     
-    print('Please choose the department you want to update\n')
-    case = input('1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
-    choose_dep(case)
-
+def admin_choice():
+    choice = input('1. Add a new product\n2. Update product quantity\n3. Check all stock\n4.Exit\n')
+    if choice == '1':
+        add_product()
+    elif choice == '2':
+        update_quantity()
+    elif choice == '3':
+        check_stock()
+    elif choice == '4':
+        print('Goodbye!')
+    else: 
+        print('You have entered an invalid number. Please, try again\n')
+        return admin_choice()   
     
+def add_product():
+    dep = choose_dep_admin()
+    print(f'Welcome to the {dep} department\n')
+    try:
+        # Access the worksheet for the given department
+        sheet = SHEET.worksheet(dep)
+        columns = get_all_columns(sheet)
+        print('The products that we currently have in stock:\n\n')
+        if columns:
+            # Displaying products with headers
+            print('Nº | Product  |  Quantity  |  Price:\n')
+            for idx, product in enumerate(columns, start=1):
+                name = product[0]
+                quantity = product[1]
+                price = product[2]
+                print(f'{idx}. {name}  |  {quantity}  |  {price} €')
+            print('')
+        else:
+            print(f'No data available for the {dep} department.')
+        print()
+        
+        # Get new product details from the admin
+        name = input('Please enter the name of the product you want to add (e.g., "pork (kg)")\n')
+        quantity = input('Please enter the quantity of the product you want to add\n')
+        price = input('Please enter the price of the product you want to add\n')
+        
+        # Validate the inputs
+        if not quantity.isdigit() or not price.isdigit():
+            print('Invalid quantity or price. Please enter numeric values.\n')
+            return add_product()
 
- 
+        # Add the new product to the worksheet
+        sheet.append_row([name, int(quantity), int(price)])
+        print(f'Product {name} with quantity {quantity} and price {price} € has been added to the {dep} department.\n')
+
+    except gspread.exceptions.WorksheetNotFound:
+        print(f'The department "{dep}" was not found. Please check the name and try again.')
+
+
+
 def customer_func():
     name = get_name()
     welcome()
