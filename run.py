@@ -323,7 +323,18 @@ def get_password():
     else:
         return False  
     
-
+def admin_func():
+    while True:  # Loop until the correct password is entered
+        if get_password():
+            break
+        else:
+            print('You have entered an invalid password. Please try again.')
+    print('You have successfully logged in!\n')
+    print('Welcome to the admin panel\n')
+    
+    print('Please choose the department you want to update\n')
+    case = input('1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
+    choose_dep(case)
 
     
 
