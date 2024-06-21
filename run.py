@@ -122,17 +122,22 @@ def choice_1(columns):
     else:
         print('Please enter a valid number')
         choice_1(columns)
-    
+def get_amount(columns, product):
+    available = int(columns[product][1])  
+    amount = int(input('Please enter the amount of the product you want to add to your cart\n'))
+    if amount > available:
+        print(f'You have entered an invalid amount. We have only {available} items in stock\n')
+        return get_amount(columns, product)
+    else:
+        return amount
 # Function to add products to cart
 def add_to_cart(columns):
     product = int(input('Please enter the number of the product you want to add to your cart\n')) - 1
     if (product > len(columns) - 1) or (product < 0):
         print('You have entered an invalid number\n')
         add_to_cart(columns)
-        
-    amount = int(input('Please enter the amount of the product you want to add to your cart\n'))
-    print('')
-    x = columns[product][0] 
+    amount = get_amount(columns, product) 
+    x = columns[product][0]
     y = int(columns[product][2])
     z = x + ' ' + str(amount)
     cart.append(z)
@@ -164,14 +169,17 @@ def choice_3(columns):
         choice_3(columns)
     
 # Function to handle checkout process
-def checkout(cart, price):
+# Function to handle checkout process
+def checkout(cart, current_price):
+    global price  # Access the global price variable if necessary
+
     print('Your cart contains the following items:\n')
     for item in cart:
         print(item)
     print()
-    print(f'Total price: {price} €\n')
+    print(f'Total price: {current_price} €\n')
     
-    nazar = Customer('Nazar', price)
+    nazar = Customer('Nazar', current_price)
     nazar.pay()
     print('Thank you for shopping with us!')
     update_sheet(cart)
@@ -179,9 +187,11 @@ def checkout(cart, price):
     i = input('1. Yes\n2. No\n')
     if i == '1':
         cart.clear()
+        price = 0  # Reset the global price variable if needed
         choose_dep()
     else:
         print('Goodbye!')
+
 
 
             
@@ -245,28 +255,95 @@ def get_name():
     name = input('Please, enter your name:\n')
     if not validate_name(name):
         print('You have entered invalid name')
-        print('Name should contain only alphabetic symbols and be 3-15 characters long')
+        print('Name should contain only alphabetic symbols and be 3-15 characters long\n')
         return get_name()  # Return the result of the recursive call
     return name
 def get_cash():
     cash = input('Please, enter the amount of cash you Would like to spend\n')
     if cash.isdigit():
-        return int(cash)
+        if int(cash) < 5:
+            print('You cant buy anything with this amount of money\n')
+            return get_cash()
+        elif int(cash) > 1000:
+            print('You have entered too much cash, less than 1000€ will be enough\n')
+            return get_cash()
+        else:
+            return int(cash)
     else: 
-        print('You have entered invalid cash amount')
+        print('You have entered invalid cash amount\n')
         return get_cash()      
+    
+def show_instructions(name):
+    print("\n" + "=" * 80)
+    print(f'{"Instructions":^80}')
+    print("=" * 80 + "\n")
+
+    print(f'Hello, {name}! Here are the instructions on how to use our online store:')
+    print()
+
+    print("1. Explore Departments:")
+    print("   - Enter the number of the department you want to visit (e.g., 1 for Meat).")
+    print("   - Browse through products in the chosen department.")
+
+    print()
+
+    print("2. Add Items to Cart:")
+    print("   - Select products by entering their corresponding numbers.")
+    print("   - Input the quantity of each product you wish to add to your cart.")
+
+    print()
+
+    print("3. Proceed to Checkout:")
+    print("   - Review your cart and total price.")
+    print("   - Confirm your purchase and update product quantities.")
+
+    print()
+
+    print("4. Additional Options:")
+    print("   - If you want to switch to another department, select the department option again.")
+    print("   - After checkout, decide whether to continue shopping or exit the program.")
+
+    print()
 # Main function to start the program
-def main():
-    welcome()
+
+def choose_user():
+    user = input('Please choose the type of user you are:\n\n1. Customer\n2. Admin\n')
+    if user == '1':
+        customer_func()
+    elif user == '2':
+        admin_func()
+    else:
+        print('You have entered an invalid number')
+        choose_user()
+
+def get_password():
+    password = input('Please enter the password\n')
+    if password == 'grocery':
+        return True
+    else:
+        return False  
+    
+
+
+    
+
+ 
+def customer_func():
     name = get_name()
+    welcome()
+    show_instructions(name)
     cash = get_cash()
     Customer.cash = int(cash)
+    case = input('Please enter the number of the department you want to visit:\n\n'
+                 '1. Meat\n'
+                 '2. Dairy\n'
+                 '3. Vegetables\n'
+                 '4. Fruits\n'
+                 '5. Candies\n')
+    choose_dep(case)      
+def main():
+    choose_user()
 
-    print(f'Hello,{name}! Here you can explore our departments')
-    print('and add items to your cart. When you\'re ready,')
-    print('you can proceed to checkout. If you need to')
-    case = input('Please, enter the department you want to visit\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
-    choose_dep(case)
 
 if __name__ == "__main__":
     main()
