@@ -345,15 +345,7 @@ def get_password():
     else:
         return False  
     
-def admin_func():
-    while True:  # Loop until the correct password is entered
-        if get_password():
-            break
-        else:
-            print('You have entered an invalid password. Please try again.')
-    print('You have successfully logged in!\n')
-    print('Welcome to the admin panel!\nWhat would you like to do?\n')
-    admin_choice()
+
     
 def admin_choice():
     choice = input('1. Add a new product\n2. Update product quantity\n3. Check all stock\n4.Exit\n')
@@ -369,30 +361,59 @@ def admin_choice():
         print('You have entered an invalid number. Please, try again\n')
         return admin_choice()   
 
-
+def check_stock():
+    all_sheets = SHEET.worksheets()
+    try:
+        print('Here is a selection of our products:\n')
+        for dep in all_sheets:
+            columns = get_all_columns(SHEET.worksheet(dep.title))
+            if columns:
+                # Displaying products with headers
+                print(f'Products in the {dep.title} department:\n')
+                print('Nº | Product  |  Quantity  |  Price:\n')
+                for idx, product in enumerate(columns, start=1):
+                    name = product[0]
+                    quantity = product[1]
+                    price = product[2]
+                    print(f'{idx}. {name}  |  {quantity}  |  {price} €')
+                print('')
+                print('-' * 40)
+            else:
+                print(f'No data available for the {dep.title} department.')
+            print()
+    except gspread.exceptions.WorksheetNotFound:
+        print(f'The department "{dep.title}" was not found. Please check the name and try again.')
+        
 
 def product_name_info():
     name = input('Please enter the name of the product you want to add (e.g., "pork (kg)")\n')
-    if not name or len(name) < 2 or len(name) > 20 or not name.isalpha():
+    if not name or len(name) < 2 or len(name) > 20:
         print('Invalid name. Please enter a valid product name.\n')
-        print('Name should contain only alphabetic symbols and be 2-20 characters long\n')
+        print('Name should contain only be 2-20 characters long\n')
+        return product_name_info()
+    elif name.isdigit():
+        print('Invalid name. Please enter a valid product name.\n')
         return product_name_info()
     return name
+
+
 def product_quantity_info():
     quantity = input('Please enter the quantity of the product you want to add\n')
     if not quantity.isdigit():
-        print('Invalid quantity. Please enter a numeric value.\n')
+        print('Invalid quantity. It can only be a numeric value.\n')
         return product_quantity_info()
     elif int(quantity) < 0:
-        print('Quantity cannot be negative. Please enter a valid quantity.\n')
+        print('Quantity cannot be negative.\n')
         return product_quantity_info()
     elif int(quantity) == 0:
-        print('Quantity cannot be zero. Please enter a valid quantity.\n')
+        print('Quantity cannot be zero.\n')
         return product_quantity_info()
     elif int(quantity) > 1000:
-        print('Quantity is too high. Please enter a valid quantity.\n')
+        print('Quantity is too high.\n')
         return product_quantity_info()
     return quantity
+
+
 def product_price_info():
     price = input('Please enter the price of the product you want to add\n')
     if not price.isdigit():
@@ -417,7 +438,7 @@ def add_product():
         sheet = SHEET.worksheet(dep)
         columns = get_all_columns(sheet)
         data = sheet.get_all_values()
-        print('The products that we currently have in stock:\n\n')
+        print('The products that we currently have in stock:\n')
         if columns:
             # Displaying products with headers
             print('Nº | Product  |  Quantity  |  Price:\n')
@@ -453,9 +474,15 @@ def add_product():
     except gspread.exceptions.WorksheetNotFound:
         print(f'The department "{dep}" was not found. Please check the name and try again.')
 
-
-
-
+def admin_func():
+    while True:  # Loop until the correct password is entered
+        if get_password():
+            break
+        else:
+            print('You have entered an invalid password. Please try again.')
+    print('You have successfully logged in!\n')
+    print('Welcome to the admin panel!\nWhat would you like to do?\n')
+    admin_choice()
 
 def customer_func():
     name = get_name()
@@ -469,6 +496,7 @@ def customer_func():
                  '3. Vegetables\n'
                  '4. Fruits\n'
                  '5. Candies\n')
+    choose_dep(case) 
     
 def main():                                                                                                                                                                                                                                                                                                                                                                                                                
     choose_user()
