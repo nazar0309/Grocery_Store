@@ -88,7 +88,7 @@ def choose_dep(case=None):
         choose_dep()
 def choose_dep_admin(case=None):
     if not case:
-        case = input('Please, enter the department you want to visit\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
+        case = input('Please, enter the department you want to add a product to\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
     dep = ''
     if case == '1':
         dep = 'meat'    
@@ -368,7 +368,47 @@ def admin_choice():
     else: 
         print('You have entered an invalid number. Please, try again\n')
         return admin_choice()   
-    
+
+
+
+def product_name_info():
+    name = input('Please enter the name of the product you want to add (e.g., "pork (kg)")\n')
+    if not name or len(name) < 2 or len(name) > 20 or not name.isalpha():
+        print('Invalid name. Please enter a valid product name.\n')
+        print('Name should contain only alphabetic symbols and be 2-20 characters long\n')
+        return product_name_info()
+    return name
+def product_quantity_info():
+    quantity = input('Please enter the quantity of the product you want to add\n')
+    if not quantity.isdigit():
+        print('Invalid quantity. Please enter a numeric value.\n')
+        return product_quantity_info()
+    elif int(quantity) < 0:
+        print('Quantity cannot be negative. Please enter a valid quantity.\n')
+        return product_quantity_info()
+    elif int(quantity) == 0:
+        print('Quantity cannot be zero. Please enter a valid quantity.\n')
+        return product_quantity_info()
+    elif int(quantity) > 1000:
+        print('Quantity is too high. Please enter a valid quantity.\n')
+        return product_quantity_info()
+    return quantity
+def product_price_info():
+    price = input('Please enter the price of the product you want to add\n')
+    if not price.isdigit():
+        print('Invalid price. Please enter a numeric value.\n')
+        return product_price_info()
+    elif int(price) < 0:
+        print('Price cannot be negative. Please enter a valid price.\n')
+        return product_price_info()
+    elif int(price) == 0:
+        print('Price cannot be zero. Please enter a valid price.\n')
+        return product_price_info()
+    elif int(price) > 100:
+        print('Price is too high. Please enter a valid price.\n')
+        return product_price_info()
+    return price
+            
 def add_product():
     dep = choose_dep_admin()
     print(f'Welcome to the {dep} department\n')
@@ -376,6 +416,7 @@ def add_product():
         # Access the worksheet for the given department
         sheet = SHEET.worksheet(dep)
         columns = get_all_columns(sheet)
+        data = sheet.get_all_values()
         print('The products that we currently have in stock:\n\n')
         if columns:
             # Displaying products with headers
@@ -391,21 +432,28 @@ def add_product():
         print()
         
         # Get new product details from the admin
-        name = input('Please enter the name of the product you want to add (e.g., "pork (kg)")\n')
-        quantity = input('Please enter the quantity of the product you want to add\n')
-        price = input('Please enter the price of the product you want to add\n')
-        
-        # Validate the inputs
+        name = product_name_info()
+        quantity = product_quantity_info()
+        price = product_price_info()
+              
+    # Validate the inputs
         if not quantity.isdigit() or not price.isdigit():
             print('Invalid quantity or price. Please enter numeric values.\n')
             return add_product()
-
-        # Add the new product to the worksheet
-        sheet.append_row([name, int(quantity), int(price)])
+        
+        # Append the new product details as a column
+        new_column = [name, quantity, price]
+        for i, value in enumerate(new_column):
+            sheet.update_cell(i + 1, len(data[0]) + 1, value)
+        print('-' * 100)
+        print('')
         print(f'Product {name} with quantity {quantity} and price {price} € has been added to the {dep} department.\n')
-
+        print('-' * 100)
+    
     except gspread.exceptions.WorksheetNotFound:
         print(f'The department "{dep}" was not found. Please check the name and try again.')
+
+
 
 
 
@@ -421,8 +469,8 @@ def customer_func():
                  '3. Vegetables\n'
                  '4. Fruits\n'
                  '5. Candies\n')
-    choose_dep(case)      
-def main():
+    
+def main():                                                                                                                                                                                                                                                                                                                                                                                                                
     choose_user()
 
 
