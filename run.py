@@ -111,6 +111,31 @@ def choose_dep_admin(case=None):
         return dep
     else:
         print('Please enter a valid department')
+        choose_dep_admin()
+        
+# Function to choose the department to update the quantity of a product
+def choose_dep_update(case=None):
+    if not case:
+        print("\n" + "=" * 80)
+        case = input('Please, enter the department where you want to update the quantity of product\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
+    dep = ''
+    if case == '1':
+        dep = 'meat'    
+        return dep
+    elif case == '2':
+        dep = 'dairy'
+        return dep
+    elif case == '3':
+        dep = 'vegetables'
+        return dep
+    elif case == '4':
+        dep = 'fruits'
+        return dep
+    elif case == '5':
+        dep = 'candies'
+        return dep
+    else:
+        print('Please enter a valid department')
         choose_dep()
 
 # Function to display products in a department
@@ -118,7 +143,7 @@ def show_dep(dep):
     try:
         print("\n" + "=" * 80)
         print(f'Welcome to the {dep} department\n')
-        print('Here is a selection of our products:\n')
+        print('Here is selection of our products:\n')
         columns = get_all_columns(SHEET.worksheet(dep))
         if columns:
             # Displaying products with headers
@@ -135,10 +160,33 @@ def show_dep(dep):
         print()
     except gspread.exceptions.WorksheetNotFound:
         print(f'The department "{dep}" was not found. Please check the name and try again.')
-
+        
+def show_dep_admin(dep):
+    try:
+        print("\n" + "=" * 80)
+        print(f'Welcome to the {dep} department\n')
+        print('Here you can see the products that we currently have in stock:\n')
+        columns = get_all_columns(SHEET.worksheet(dep))
+        if columns:
+            # Displaying products with headers
+            print('Nº | Product  |  Quantity  |  Price:\n')
+            for idx, product in enumerate(columns, start=1):
+                name = product[0]
+                quantity = product[1]
+                price = product[2]
+                print(f'{idx}. {name}  |  {quantity}  |  {price} €')
+            print('')
+        else:
+            print(f'No data available for the {dep} department.')
+        print()
+    except gspread.exceptions.WorksheetNotFound:
+        print(f'The department "{dep}" was not found. Please check the name and try again.')
+    
 # Cart and price tracking
 cart = [] # List to store cart items
 price = 0 # Total price of the cart
+
+
 def choice_1(columns):
     print("\n" + "=" * 80)
     print('Would you like to add any of these products to your cart?\n')
@@ -312,8 +360,7 @@ def get_name():
 
 # Function to update the quantity of a product
 def get_cash():
-    cash = input('Please, enter the amount of cash you Would like to spend\n')
-    print("\n" + "=" * 80)
+    cash = input('Please, enter the amount of cash you would like to spend\n')
     # Validating the cash amount
     if cash.isdigit():
         if int(cash) < 5:
@@ -381,8 +428,19 @@ def get_password():
     else:
         return False  
     
+def go_back():
+    print("\n" + "=" * 80)
+    print('Would you like to go back to the main menu?\n')
+    i = input('1. Yes\n2. No, I want to leave a program\n')
+    if i == '1':
+        admin_choice()
+    elif i == '2':
+        print('Goodbye!')
+    else:
+        print('You have entered an invalid number')
+        go_back()
 
-# Function fot admin to choose the action    
+#Function fot admin to choose the action    
 def admin_choice():
     choice = input('1. Add a new product\n2. Update product quantity\n3. Check all stock\n4.Exit\n')
     print("\n" + "=" * 80)
@@ -423,6 +481,7 @@ def check_stock():
             print()
     except gspread.exceptions.WorksheetNotFound:
         print(f'The department "{dep.title}" was not found. Please check the name and try again.')
+    go_back()
         
 # Function to get a new products name
 def product_name_info():
@@ -475,53 +534,84 @@ def product_price_info():
         print('Price is too high. Please enter a valid price.\n')
         return product_price_info()
     return price
-           
+
+# Function to update the quantity of a product as an admin
+def get_number_to_update(columns):
+    product = input('Please, enter the number of the product you want to update the quantity of\n')
+    # Validate the product number
+    if not product.isdigit() or int(product) > len(columns) or int(product) < 1:
+        print('You have entered an invalid number\n')
+        return get_number_to_update()
+    print("\n" + "=" * 80)
+    return product
+
+def get_quantity_to_update():
+    number = input('Please, enter how much of this product you want to add\n')
+    if not number.isdigit():
+        print('Invalid quantity. Please enter a numeric value.\n')
+        return get_quantity_to_update()
+    elif int(number) < 0:
+        print('Quantity cannot be negative. Please enter a valid quantity.\n')
+        return get_quantity_to_update()
+    elif int(number) == 0:
+        print('Quantity cannot be zero. Please enter a valid quantity.\n')
+        return get_quantity_to_update()
+    elif int(number) > 1000:
+        print('Quantity is too high. Please enter a valid quantity.\n')
+        return get_quantity_to_update()
+    print("\n" + "=" * 80)
+    return number
+    
+    
+    
+def update_quantity():
+    dep = choose_dep_admin()
+    print(f'Welcome to the {dep} department!\n')
+    show_dep_admin(dep)
+    columns = get_all_columns(SHEET.worksheet(dep))
+    number = get_number_to_update(columns)
+    quantity = get_quantity_to_update()
+    current_quantity = int(columns[int(number) - 1][1])
+    updated_quantity = current_quantity + int(quantity)
+    
+    # Update the quantity in the worksheet
+    worksheet = SHEET.worksheet(dep)
+    cell = worksheet.cell(int(number), 2)  # Assuming the quantity is in the second column
+    worksheet.update_cell(cell.row, cell.col, updated_quantity)
+    
+    print('The quantity of the product has been updated successfully.\n')
+    print('Now we have ' + str(updated_quantity) + ' items of ' + columns[int(number) - 1][0] + ' in stock.\n')
+    go_back()
+
+    
+
+          
 # Function to add a new product to the stock
 def add_product():
     dep = choose_dep_admin()
     print(f'Welcome to the {dep} department!\n')
-    try:
-        # Access the worksheet for the given department
-        sheet = SHEET.worksheet(dep)
-        columns = get_all_columns(sheet)
-        data = sheet.get_all_values()
-        print('-' * 50)
-        print('')
-        print('The products that we currently have in stock:\n')
-        if columns:
-            # Displaying products with headers
-            print('Nº | Product  |  Quantity  |  Price:\n')
-            for idx, product in enumerate(columns, start=1):
-                name = product[0]
-                quantity = product[1]
-                price = product[2]
-                print(f'{idx}. {name}  |  {quantity}  |  {price} €')
-            print('')
-            print("\n" + "=" * 80)
-        else:
-            print(f'No data available for the {dep} department.')
-        print()
+    show_dep_admin(dep)
         
-        # Get new product details from the admin
-        name = product_name_info()
-        quantity = product_quantity_info()
-        price = product_price_info()
+    # Get new product details from the admin
+    name = product_name_info()
+    quantity = product_quantity_info()
+    price = product_price_info()
+    sheet = SHEET.worksheet(dep)
+    data = sheet.get_all_values()
               
     # Validate the inputs
-        if not quantity.isdigit() or not price.isdigit():
-            print('Invalid quantity or price. Please enter numeric values.\n')
-            return add_product()
+    if not quantity.isdigit() or not price.isdigit():
+        print('Invalid quantity or price. Please enter numeric values.\n')
+        return add_product()
         
-        # Append the new product details as a column
-        new_column = [name, quantity, price]
-        for i, value in enumerate(new_column):
-            sheet.update_cell(i + 1, len(data[0]) + 1, value)
-        print("\n" + "=" * 80)
-        print('')
-        print(f'Product {name} with quantity {quantity} and price {price} € has been added to the {dep} department.\n')
-    
-    except gspread.exceptions.WorksheetNotFound:
-        print(f'The department "{dep}" was not found. Please check the name and try again.')
+    # Append the new product details as a column
+    new_column = [name, quantity, price]
+    for i, value in enumerate(new_column):
+        sheet.update_cell(i + 1, len(data[0]) + 1, value)
+    print("\n" + "=" * 80)
+    print('')
+    print(f'Product {name} with quantity {quantity} and price {price} € has been added to the {dep} department.\n')
+    go_back()
 
 # Main main admin function 
 def admin_func():
