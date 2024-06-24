@@ -111,7 +111,7 @@ def choose_dep_admin(case=None):
         return dep
     else:
         print('Please enter a valid department')
-        choose_dep_admin()
+        return choose_dep_admin()
         
 # Function to choose the department to update the quantity of a product
 def choose_dep_update(case=None):
@@ -575,9 +575,9 @@ def update_quantity():
     updated_quantity = current_quantity + int(quantity)
     
     # Update the quantity in the worksheet
-    worksheet = SHEET.worksheet(dep)
-    cell = worksheet.cell(int(number), 2)  # Assuming the quantity is in the second column
-    worksheet.update_cell(cell.row, cell.col, updated_quantity)
+    sheet = SHEET.worksheet(dep)
+    cell = sheet.find(columns[int(number) - 1][0])
+    sheet.update_cell(cell.row + 1, cell.col, updated_quantity)
     
     print('The quantity of the product has been updated successfully.\n')
     print('Now we have ' + str(updated_quantity) + ' items of ' + columns[int(number) - 1][0] + ' in stock.\n')
