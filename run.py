@@ -86,7 +86,7 @@ def choose_dep(case=None):
         show_dep(dep)
     else:
         print('Please enter a valid department')
-        choose_dep()
+        return choose_dep()
 
 # Function to choose department for admin
 def choose_dep_admin(case=None):
@@ -136,7 +136,7 @@ def choose_dep_update(case=None):
         return dep
     else:
         print('Please enter a valid department')
-        choose_dep()
+        return choose_dep_update()
 
 # Function to display products in a department
 def show_dep(dep):
@@ -565,7 +565,7 @@ def get_quantity_to_update():
     
     
 def update_quantity():
-    dep = choose_dep_admin()
+    dep = choose_dep_update()
     print(f'Welcome to the {dep} department!\n')
     show_dep_admin(dep)
     columns = get_all_columns(SHEET.worksheet(dep))
