@@ -6,7 +6,7 @@ After logging in for the client, we enter our name, after which we are shown an 
 
 After checkout, we can continue shopping or leave the store
 
-![Home Screen]
+![Home Screen](/readme_images/homepage.png)
 
 [View Grocery Store live project here:]
 - - -
