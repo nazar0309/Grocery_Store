@@ -1,32 +1,12 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Grocery Store
 
-Welcome,
+The grocery store is an online store simulator. By entering the program, we can choose a role: Client or admin. For the admin, we first need to enter the correct password. By entering it, we have a choice: add a new product to the store, update the number of existing product and show the whole list of goods from all departments. After each action we can leave the program or go back to the admin pannel.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **May 14, 2024**
+After logging in for the client, we enter our name, after which we are shown an instruction, after which we need to enter the amount of cash we took with us. Than we select a department, and there is a choice to move to another department or add a product. After selecting the product and its quantity, it is added to the cart. After that, we can proceed to the payment, where we are shown the goods we have chosen and how much cash we have left. If we dont have enough cash, we will be informed about it. After payment, the quantity of goods is automatically updated.
 
-## Reminders
+After checkout, we can continue shopping or leave the store
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
+![Home Screen]
 
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
----
-
-Happy coding!
+[View Grocery Store live project here:]
+- - -
