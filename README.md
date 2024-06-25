@@ -12,7 +12,7 @@ After checkout, we can continue shopping or leave the store
 - - -
 
 ## Table of Contents
-### [How to play](#how-to-play-1)
+### [How to use](#how-to-use-1)
 ### [Logic Flowchart](#logic-flowchart-1)
 ### [User Experience (UX)](#user-experience-ux-1)
 * [User Stories](#user-stories)
@@ -34,3 +34,14 @@ After checkout, we can continue shopping or leave the store
 * [Code](#code)
 * [Content](#content)
 ### [Acknowledgements](#acknowledgements-1)
+
+## How to Use
+
+To use this program, we need to track the stock of products in our SpreadSheet, which is well organised 
+in the tables. More information about the program you can find upon in the description.
+
+
+
+
+
+
