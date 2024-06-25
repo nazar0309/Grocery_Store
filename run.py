@@ -66,10 +66,7 @@ def welcome():
           
           ''')
 # Function to choose department and show products
-def choose_dep(case=None):
-    if not case:
-        print("\n" + "=" * 80)
-        case = input('Please, enter the department you want to visit\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
+def choose_dep(case):
     dep = ''
     if case == '1':
         dep = 'meat'    
@@ -94,7 +91,7 @@ def choose_dep(case=None):
 def choose_dep_admin(case=None):
     if not case:
         print("\n" + "=" * 80)
-        case = input('Please, enter the department you want to add a product to\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
+        case = input('Please, enter the department you want to add a product to\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n\n')
     dep = ''
     if case == '1':
         dep = 'meat'    
@@ -119,7 +116,7 @@ def choose_dep_admin(case=None):
 def choose_dep_update(case=None):
     if not case:
         print("\n" + "=" * 80)
-        case = input('Please, enter the department where you want to update the quantity of product\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n')
+        case = input('Please, enter the department where you want to update the quantity of product\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n\n')
     dep = ''
     if case == '1':
         dep = 'meat'    
@@ -444,7 +441,7 @@ def go_back():
 
 #Function fot admin to choose the action    
 def admin_choice():
-    choice = input('1. Add a new product\n2. Update product quantity\n3. Check all stock\n4.Exit\n')
+    choice = input('1. Add a new product\n2. Update product quantity\n3. Check all stock\n4.Exit\n\n')
     print("\n" + "=" * 80)
     if choice == '1':
         add_product()
@@ -640,7 +637,7 @@ def customer_func():
     # Set the cash amount for the customer
     Customer.cash = int(cash)
     print("\n" + "=" * 80)
-    case = input('Please, enter the department you want to visit:\n'
+    case = input('Please, enter the department you want to visit:\n\n'
                  '1. Meat\n'
                  '2. Dairy\n'
                  '3. Vegetables\n'
