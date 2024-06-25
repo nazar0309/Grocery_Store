@@ -43,11 +43,10 @@ in the tables. More information about the program you can find upon in the descr
 
 ## Logic flowchart
 
-![Flowchart]
-(/readme_images/flowchart_1.png)
-(/readme_images/flowchart_2.png)
-(/readme_images/flowchart_3.png)
-(/readme_images/flowchart_4.png)
+![Flowchart1](/readme_images/flowchart_1.png)
+![Flowchart2](/readme_images/flowchart_2.png)
+![Flowchart3](/readme_images/flowchart_3.png)
+![Flowchart4](/readme_images/flowchart_4.png)
 
 
 
