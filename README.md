@@ -219,6 +219,31 @@ My application comes packed with a range of features designed to enhance the use
   ![Features11](/readme_images/features_11.png)
 
 ---
+## Features Left to Implement
+
+While my Online Grocery Store application already offers a robust set of functionalities, there are several additional features planned to further enhance the user experience and operational efficiency. Below is a list of features currently under development or planned for future releases:
+
+### For Customers
+
+1. **Advanced Search and Filtering**
+   - Develop advanced search options and filtering capabilities to help users find products more efficiently.
+   - Include filters for price range, brand, dietary preferences, etc.
+
+2. **Product Reviews and Ratings**
+   - Enable customers to leave reviews and rate products to provide feedback and assist other shoppers.
+
+### For Administrators
+
+1. **Sales and Analytics Dashboard**
+   - Develop a comprehensive dashboard to provide insights into sales trends, customer behavior, and inventory levels.
+
+2. **Discounts and Promotions Management**
+   - Implement tools for creating and managing discounts, promotional offers, and coupon codes.
+
+
+---
+
+
 
 
 
