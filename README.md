@@ -41,6 +41,15 @@ To use this program, we need to track the stock of products in our SpreadSheet, 
 in the tables. More information about the program you can find upon in the description.
 
 
+## Logic flowchart
+
+![Flowchart]
+(/readme_images/flowchart_1.png)
+(/readme_images/flowchart_2.png)
+(/readme_images/flowchart_3.png)
+(/readme_images/flowchart_4.png)
+
+
 
 
 

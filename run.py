@@ -66,7 +66,10 @@ def welcome():
           
           ''')
 # Function to choose department and show products
-def choose_dep(case):
+def choose_dep(case = None):
+    if not case:
+        print("\n" + "=" * 80)
+        case = input('Please, enter the department you want to visit\n\n1. Meat\n2. Dairy\n3. Vegetables\n4. Fruits\n5. Candies\n\n')
     dep = ''
     if case == '1':
         dep = 'meat'    
@@ -637,13 +640,7 @@ def customer_func():
     # Set the cash amount for the customer
     Customer.cash = int(cash)
     print("\n" + "=" * 80)
-    case = input('Please, enter the department you want to visit:\n\n'
-                 '1. Meat\n'
-                 '2. Dairy\n'
-                 '3. Vegetables\n'
-                 '4. Fruits\n'
-                 '5. Candies\n')
-    choose_dep(case) 
+    choose_dep() 
 
 # Main function to run the program
 def main():                                                                                                                                                                                                                                                                                                                                                                                                                
