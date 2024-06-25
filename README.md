@@ -106,14 +106,14 @@ Our application is structured to ensure easy navigation, clear instructions, and
 4. **Checking Out**
    - **As a customer**, I want to proceed to checkout, so that I can complete my purchase.
    - **Acceptance Criteria**:
-     - I can confirm my cart and proceed to payment.
+     - If i have enough money, I proceed to payment.
      - I receive a confirmation of my purchase and see my remaining balance.
 
 5. **Managing Budget**
    - **As a customer**, I want to set my budget, so that I can manage my spending.
    - **Acceptance Criteria**:
      - I can input the amount of cash I have.
-     - I am notified if I exceed my budget.
+     - I am notified if I set to much money.
 
 ### As an Administrator
 
@@ -138,6 +138,85 @@ Our application is structured to ensure easy navigation, clear instructions, and
    - **As an administrator**, I want to protect admin functions with a password, so that unauthorized users cannot make changes.
    - **Acceptance Criteria**:
      - Admin functions are accessible only after entering a correct password.
+
+---
+
+
+## Features
+
+My application comes packed with a range of features designed to enhance the user experience and streamline store management. Below is an outline of the key features:
+
+### For Customers
+
+1. **User-Friendly Interface**
+   - Intuitive and easy-to-navigate interface designed for a smooth shopping experience.
+   - Clear categorization of products into departments (Meat, Dairy, Vegetables, Fruits, Candies).
+
+   ![Features1](/readme_images/features_1.png)
+
+2. **Product Browsing**
+   - Browse products by selecting specific departments.
+   - View detailed product information including name, available quantity, and price.
+
+   ![Features2](/readme_images/features_2.png)
+
+3. **Shopping Cart**
+   - Easily add products to the shopping cart with specified quantities.
+   - Review cart contents.
+   - See a running total of the cost of items in the cart.
+
+   ![Features3](/readme_images/features_3.png)
+    
+4. **Budget Management**
+   - Set a budget and keep track of spending.
+   - Receive notifications if the total cart value exceeds the set budget.
+
+    ![Features10](/readme_images/features_10.png)
+
+
+5. **Seamless Checkout**
+   - Confirm and finalize purchases.
+   - Receive a summary of the transaction and remaining budget.
+
+   ![Features4](/readme_images/features_4.png)
+
+### For Administrators
+
+1. **Inventory Management**
+   - Add new products to the store with detailed information (name, quantity, price).
+   - Update existing product quantities to reflect current stock levels.
+
+   ![Features6](/readme_images/features_6.png)
+   ![Features8](/readme_images/features_8.png)
+
+2. **Comprehensive Stock View**
+   - View a complete list of all products across all departments.
+   - Quickly assess stock levels and identify low-stock items.
+
+   ![Features9](/readme_images/features_9.png)
+
+3. **Secure Access**
+   - Protect administrative functions with a password to prevent unauthorized access.
+   - Ensure only authorized personnel can manage the store inventory.
+
+   ![Features5](/readme_images/features_5.png)
+
+4. **Real-Time Updates**
+   - Real-time updates to inventory and stock levels as products are added, updated, or removed.
+
+    ![Features7](/readme_images/features_7.png)
+
+### Error Handling and Validation
+
+- **Input Validation**
+  - Ensure accurate data entry with input validations for product details and quantities.
+  - Prevent errors such as incorrect product numbers or invalid quantities.
+
+- **Clear Error Messages**
+  - Provide descriptive error messages to guide users in resolving issues.
+  - Ensure users are informed of any problems with their actions or inputs.
+
+  ![Features11](/readme_images/features_11.png)
 
 ---
 
