@@ -25,8 +25,10 @@ class Customer:
         if self.__class__.cash >= self.price:
             self.__class__.cash -= self.price
             print(f'You have paid {self.price} €. You have {self.cash} € left.\n')
+            return True
         else:
             print('You do not have enough money to pay for your cart.')
+            return False
 
 # Function to welcome the user
 def welcome():
@@ -270,10 +272,10 @@ def checkout(cart, current_price):
     print(f'Total price: {current_price} €\n')
     # Create a new Customer instance and pay for the cart
     nazar = Customer('Nazar', current_price)
-    nazar.pay()
-    print('Thank you for shopping with us!')
+    if nazar.pay():
+        print('Thank you for shopping with us!')
     # Update the product quantities in the Google Sheet
-    update_sheet(cart)
+        update_sheet(cart)
     # Ask the user if they want to continue shopping
     print("\n" + "=" * 80)
     print('Would you like to continue shopping?\n')
