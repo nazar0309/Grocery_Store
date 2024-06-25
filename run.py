@@ -409,7 +409,7 @@ def show_instructions(name):
 
 # Function to choose the role of the user
 def choose_user():
-    user = input('Please choose the type of user you are:\n\n1. Customer\n2. Admin\n')
+    user = input('\nPlease choose the type of user you are:\n\n1. Customer\n2. Admin\n\n')
     print("\n" + "=" * 80)
     if user == '1':
         customer_func()
