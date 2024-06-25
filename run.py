@@ -10,17 +10,19 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-spreadsheet_id = "1jwVRtZF2Qd35Wlwrlh4km0jNPHN_qd-uEvJV6k8ekGU"  # Replace with your actual spreadsheet ID
+spreadsheet_id = "1jwVRtZF2Qd35Wlwrlh4km0jNPHN_qd-uEvJV6k8ekGU"
+# Replace with your actual spreadsheet ID
 SHEET = GSPREAD_CLIENT.open_by_key(spreadsheet_id)
+
 
 # Customer class for handling cash and payment
 class Customer:
-   # Initial cash amount for demonstration
+    # Initial cash amount for demonstration
     cash = 0
+
     def __init__(self, name, price):
         self.name = name
-        self.price = price
-        
+        self.price = price    
     def pay(self):
         if self.__class__.cash >= self.price:
             self.__class__.cash -= self.price
@@ -65,6 +67,8 @@ def welcome():
           ╚══════╝        ╚═╝         ╚═════╝     ╚═╝  ╚═╝    ╚══════╝
           
           ''')
+    
+    
 # Function to choose department and show products
 def choose_dep(case = None):
     if not case:
@@ -89,6 +93,7 @@ def choose_dep(case = None):
     else:
         print('Please enter a valid department')
         return choose_dep()
+    
 
 # Function to choose department for admin
 def choose_dep_admin(case=None):
@@ -114,6 +119,7 @@ def choose_dep_admin(case=None):
     else:
         print('Please enter a valid department')
         return choose_dep_admin()
+    
         
 # Function to choose the department to update the quantity of a product
 def choose_dep_update(case=None):
@@ -139,6 +145,7 @@ def choose_dep_update(case=None):
     else:
         print('Please enter a valid department')
         return choose_dep_update()
+    
 
 # Function to display products in a department
 def show_dep(dep):
@@ -163,6 +170,8 @@ def show_dep(dep):
     except gspread.exceptions.WorksheetNotFound:
         print(f'The department "{dep}" was not found. Please check the name and try again.')
         
+        
+# Function to display products in a department for admin
 def show_dep_admin(dep):
     try:
         print("\n" + "=" * 80)
@@ -183,6 +192,7 @@ def show_dep_admin(dep):
         print()
     except gspread.exceptions.WorksheetNotFound:
         print(f'The department "{dep}" was not found. Please check the name and try again.')
+        
     
 # Cart and price tracking
 cart = [] # List to store cart items
@@ -201,6 +211,7 @@ def choice_1(columns):
         print('Please enter a valid number')
         choice_1(columns)
         
+        
 # Function to get the amount of a product       
 def get_amount(columns, product): 
     available = int(columns[product][1]) # Get the available quantity of the product
@@ -211,6 +222,7 @@ def get_amount(columns, product):
         return get_amount(columns, product)
     else:
         return amount
+    
     
 # Function to add products to cart
 def add_to_cart(columns):
@@ -231,6 +243,7 @@ def add_to_cart(columns):
     price += y * amount
     print(f'{z} has been added to your cart')
     choice_2(columns)
+    
 
 # Function to handle the choice to add more products to the cart
 def choice_2(columns): 
@@ -244,6 +257,7 @@ def choice_2(columns):
     else: 
         print('Please enter a valid number')
         choice_2(columns)
+        
 
 # Function to handle the choice to proceed to checkout or choose another department       
 def choice_3(columns):
@@ -262,7 +276,6 @@ def choice_3(columns):
 # checkout function to display the cart and total price and proceed to payment
 def checkout(cart, current_price):
     global price  # Access the global price variable 
-
     # Display the cart and total price
     print("\n" + "=" * 80)
     print('Your cart contains the following items:\n')
@@ -286,7 +299,6 @@ def checkout(cart, current_price):
         choose_dep()
     else:
         print('Goodbye!')
-
 
 
 # Function to update product quantities in the Google Sheet           
@@ -331,8 +343,6 @@ def update_sheet(cart):
             print(f"Product '{product_name}' not found in any worksheet.")
 
 
-      
-
 # Function to retrieve all columns from a Google Sheet worksheet
 def get_all_columns(sheet):
     # Retrieve all data from the worksheet
@@ -360,6 +370,7 @@ def get_name():
         return get_name()  # Return the result of the recursive call
     return name
 
+
 # Function to update the quantity of a product
 def get_cash():
     cash = input('Please, enter the amount of cash you would like to spend\n')
@@ -376,6 +387,7 @@ def get_cash():
     else: 
         print('You have entered invalid cash amount\n')
         return get_cash()      
+
 
 # Function to show the instructions for the customer
 def show_instructions(name):
@@ -410,6 +422,7 @@ def show_instructions(name):
 
     print()
 
+
 # Function to choose the role of the user
 def choose_user():
     user = input('\nPlease choose the type of user you are:\n\n1. Customer\n2. Admin\n\n')
@@ -422,6 +435,7 @@ def choose_user():
         print('You have entered an invalid number')
         choose_user()
 
+
 # Function to get the password
 def get_password():
     password = input('Please enter the password\n')
@@ -429,6 +443,7 @@ def get_password():
         return True
     else:
         return False  
+    
     
 def go_back():
     print("\n" + "=" * 80)
@@ -441,6 +456,7 @@ def go_back():
     else:
         print('You have entered an invalid number')
         go_back()
+
 
 #Function fot admin to choose the action    
 def admin_choice():
@@ -457,6 +473,7 @@ def admin_choice():
     else: 
         print('You have entered an invalid number. Please, try again\n')
         return admin_choice()   
+
 
 # Function to show all products in the stock
 def check_stock():
@@ -485,6 +502,7 @@ def check_stock():
         print(f'The department "{dep.title}" was not found. Please check the name and try again.')
     go_back()
         
+        
 # Function to get a new products name
 def product_name_info():
     name = input('Please enter the name of the product you want to add (e.g., "pork (kg)")\n')
@@ -498,6 +516,7 @@ def product_name_info():
         print('Invalid name. Please enter a valid product name.\n')
         return product_name_info()
     return name
+
 
 # Function to get a new products quantity
 def product_quantity_info():
@@ -518,6 +537,7 @@ def product_quantity_info():
         return product_quantity_info()
     return quantity
 
+
 # Function to get a new products price
 def product_price_info():
     price = input('Please enter the price of the product you want to add\n')
@@ -537,6 +557,7 @@ def product_price_info():
         return product_price_info()
     return price
 
+
 # Function to update the quantity of a product as an admin
 def get_number_to_update(columns):
     product = input('Please, enter the number of the product you want to update the quantity of\n')
@@ -547,6 +568,8 @@ def get_number_to_update(columns):
     print("\n" + "=" * 80)
     return product
 
+
+# Function to get the quantity to update
 def get_quantity_to_update():
     number = input('Please, enter how much of this product you want to add\n')
     if not number.isdigit():
@@ -565,7 +588,7 @@ def get_quantity_to_update():
     return number
     
     
-    
+# Function to update the quantity of a product   
 def update_quantity():
     dep = choose_dep_update()
     print(f'Welcome to the {dep} department!\n')
@@ -585,15 +608,13 @@ def update_quantity():
     print('Now we have ' + str(updated_quantity) + ' items of ' + columns[int(number) - 1][0] + ' in stock.\n')
     go_back()
 
-    
-
-          
+       
 # Function to add a new product to the stock
 def add_product():
     dep = choose_dep_admin()
     print(f'Welcome to the {dep} department!\n')
     show_dep_admin(dep)
-        
+    
     # Get new product details from the admin
     name = product_name_info()
     quantity = product_quantity_info()
@@ -605,7 +626,7 @@ def add_product():
     if not quantity.isdigit() or not price.isdigit():
         print('Invalid quantity or price. Please enter numeric values.\n')
         return add_product()
-        
+         
     # Append the new product details as a column
     new_column = [name, quantity, price]
     for i, value in enumerate(new_column):
@@ -614,6 +635,7 @@ def add_product():
     print('')
     print(f'Product {name} with quantity {quantity} and price {price} € has been added to the {dep} department.\n')
     go_back()
+
 
 # Main main admin function 
 def admin_func():
@@ -627,6 +649,7 @@ def admin_func():
     print('Welcome to the admin panel!\nWhat would you like to do?\n')
     # Choose the action if the password is correct
     admin_choice()
+
 
 # Main function for the customer
 def customer_func():
@@ -642,9 +665,11 @@ def customer_func():
     print("\n" + "=" * 80)
     choose_dep() 
 
+
 # Main function to run the program
 def main():                                                                                                                                                                                                                                                                                                                                                                                                                
     choose_user()
+
 
 # Run the main function
 if __name__ == "__main__":

@@ -243,7 +243,38 @@ While my Online Grocery Store application already offers a robust set of functio
 
 ---
 
+## Design
 
+* Colors
+    * black
+    * white
+
+* Flowchart
+    * [Draw.io](http://draw.io/)
+
+
+---
+
+## Technologies Used
+
+* [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
+
+---
+
+## Frameworks, Libraries & Programs Used
+
+* [Visual Studio Code](https://code.visualstudio.com/)
+    * To write the code.
+* [Git](https://git-scm.com/)
+    * for version control.
+* [Github](https://github.com/)
+    * Deployment of the website and storing the files online.
+* [Draw.io](http://draw.io/)
+    * To create a logic flowchart of the hangman game.
+* [Heroku](https://www.heroku.com/)
+    * To deploy the project.
+* [CI Python Linter](https://pep8ci.herokuapp.com/)
+    * Check code for any issues.
 
 
 
