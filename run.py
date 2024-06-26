@@ -78,7 +78,7 @@ def welcome():
 def choose_dep(case=None):
     if not case:
         print("\n" + "=" * 80)
-        case = input('''Please, enter the department you want to visit
+        case = input('''Please, enter the department you want to visit\n
 1. Meat
 2. Dairy
 3. Vegetables
@@ -252,7 +252,7 @@ def add_to_cart(columns):
     product = int(input('''Please enter the number of the product you want to
 add to your cart\n''')) - 1
     # Validate the product number
-    if (product > len(columns) - 1) or (product < 0):
+    if (product > len(columns) - 1) or (product < 0) or not product.isdigit():
         print('You have entered an invalid number\n')
         add_to_cart(columns)
     # Get the amount of the product
@@ -300,9 +300,25 @@ def choice_3(columns):
         choice_3(columns)
 
 
+# Function to exit the program or continue shopping
+def exit_program():
+    print("\n" + "=" * 80)
+    print('Would you like to continue shopping?\n')
+    i = input('1. Yes\n2. No\n')
+    if i == '1':
+        cart.clear()
+        global price  # Reset the global price variable if needed
+        price = 0
+        choose_dep()
+    elif i == '2':
+        print('Goodbye!')
+    else:
+        print('Please enter a valid number')
+        exit_program()
+
+
 # checkout function to display the cart and total price and proceed to payment
 def checkout(cart, current_price):
-    global price  # Access the global price variable
     # Display the cart and total price
     print("\n" + "=" * 80)
     print('Your cart contains the following items:\n')
@@ -317,15 +333,7 @@ def checkout(cart, current_price):
     # Update the product quantities in the Google Sheet
         update_sheet(cart)
     # Ask the user if they want to continue shopping
-    print("\n" + "=" * 80)
-    print('Would you like to continue shopping?\n')
-    i = input('1. Yes\n2. No\n')
-    if i == '1':
-        cart.clear()
-        price = 0  # Reset the global price variable if needed
-        choose_dep()
-    else:
-        print('Goodbye!')
+        exit_program()
 
 
 # Function to update product quantities in the Google Sheet
@@ -722,16 +730,5 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-
-
-    
-
-
-    
-
-    
-    
-    
 
 
