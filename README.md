@@ -284,7 +284,7 @@ While my Online Grocery Store application already offers a robust set of functio
 * [Google Sheets](https://workspace.google.com/products/sheets/)
     * To track the stock in online-store
 
-## Testing 
+# Testing 
 
 
 * CI Python Linter was used to test run.py:
@@ -295,7 +295,8 @@ While my Online Grocery Store application already offers a robust set of functio
 
 The Grocery Store was manually tested extensively using Visual Stusio Code terminal, and once the website was deployed on Heroku it was manually tested again, during the creation of the code to the end.
 
-Here you can see the tables that I have created while testing: 
+<a href = 'README.md'>Here you can see the tables that I have created while testing </a>
+
 
 
 
