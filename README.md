@@ -377,15 +377,13 @@ Difference between clone and fork: "Forking creates your own copy of a repositor
 ### Code
 
 * I gained understanding of python through code institute lessons.
-* I gained more python concepts through Python for begginers written by Brady Ellison.
 * Python 3.11.3 documentation.
-* ANSI color documentation.
-* MDN web docs for python [Documentation](https://developer.mozilla.org/en-US/docs/Glossary/Python).
+
 
 ### Content
 
-* Hangman game.
 * All content was written by the developer.
+* To create Grocery Store welcome message i have used <a href = 'https://en.wikipedia.org/wiki/ASCII_art'>ASCII art documentation</a>
 
 ## Acknowledgements
 
