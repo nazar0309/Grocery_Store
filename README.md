@@ -286,7 +286,113 @@ While my Online Grocery Store application already offers a robust set of functio
 
 ## Testing 
 
-CI Python Linter was used to test run.py
+
+* CI Python Linter was used to test run.py:
+
+    ![CI_Python](/readme_images/ci_python.png)
+
+### Manual testing
+
+
+
+
+
+
+
+
+# Deployment and local development
+
+## Deploying to Heroku
+
+To deploy with Heroku, Code Institute Python Essentials Template was used so the python code can be viewed in a terminal in a browser
+1. Log in to Heroku or create a new account
+2. On the main page click "New" and select "Create new app"
+3. Choose your unique app name and select your region
+4. Click "Create app"
+5. On the next page find "settings" and locate "Config Vars"
+6. Click "Reveal Config Vars" and add "PORT" key and value "8000", click "Add"
+7. Scroll down, locate "Buildpack" and click "Add", select "Python"
+8. Repeat step 7. only this time add "Node.js", make sure "Python" is first
+9. Scroll to the top and select "Deploy" tab
+10. Select GitHub as deployment method and search for your repository and link them together
+11. Scroll down and select either "Enable Automatic Deploys" or "Manual Deploy"
+12. Deployed site [Grocery Store](https://grocery-storee-12f87187c033.herokuapp.com/)
+
+
+
+## How to deploy on GitHub
+The website was deployed on GitHub Pages following these steps:
+
+1.Go to GitHub, navigate through Repository/settings/pages.<br>
+2.Select "main branch" in the source tab and click save.<br>
+3.The page should look like this, which includes the webpages address:<br>
+
+<img src="/assets/readme_images/deployment.png">
+
+
+## How to Fork and Clone a Project
+
+### Forking a Project
+
+1. **Sign in to GitHub**:
+   - Ensure you are logged into your GitHub account.
+
+2. **Navigate to the Repository**:
+   - Go to the repository you want to fork. You can use the search bar at the top of the GitHub homepage to find the repository.
+
+3. **Fork the Repository**:
+   - Click the "Fork" button in the top-right corner of the repository page.
+   - GitHub will create a copy of the repository in your account.
+
+### Cloning a Project
+
+1. **Navigate to Your Forked Repository**:
+   - Go to your GitHub profile and navigate to the forked repository.
+
+2. **Get the Repository URL**:
+   - Click the "Code" button on the repository page.
+   - Copy the URL from the HTTPS tab. It should look something like `https://github.com/your-username/repository.git`.
+
+3. **Open Your Terminal**:
+   - Open your terminal or command prompt.
+
+4. **Run the Git Clone Command**:
+   ```bash
+   git clone <repository-url>
+
+   Replace <repository-url> with the URL you copied. For example:
+   git clone https://github.com/your-username/repository.git
+   Navigate to the Cloned Repository:
+Once the cloning process is complete, navigate to the repository folder:
+cd repository
+Replace repository with the name of the cloned repository.
+
+
+
+
+Difference between clone and fork: "Forking creates your own copy of a repository in a remote location (for example, GitHub). Your own copy means that you will be able to contribute changes to your copy of the repository without affecting the original repository. Cloning makes a local copy of a repository, not your own copy." <a href="https://www.educative.io/answers/what-is-the-difference-between-forking-and-cloning-in-git">Full explanation</a><br>
+
+## Credits
+
+### Code
+
+* I gained understanding of python through code institute lessons.
+* I gained more python concepts through Python for begginers written by Brady Ellison.
+* Python 3.11.3 documentation.
+* ANSI color documentation.
+* MDN web docs for python [Documentation](https://developer.mozilla.org/en-US/docs/Glossary/Python).
+
+### Content
+
+* Hangman game.
+* All content was written by the developer.
+
+## Acknowledgements
+
+ * My mentor Mitko Bachvarov provided helpful feedback.
+ * Slack community for encouragement.
+
+
 
 
 
