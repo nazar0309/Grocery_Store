@@ -140,7 +140,7 @@ def choose_dep_update(case=None):
     if not case:
         print("\n" + "=" * 80)
         case = input('''Please, enter the department where you want to update
-the quantity of product\n\n1. Meat\n2. Dairy\n
+the quantity of product\n\n1. Meat\n2. Dairy
 3. Vegetables\n4. Fruits\n5. Candies\n\n''')
     dep = ''
     if case == '1':
@@ -511,6 +511,7 @@ def go_back():
 
 # Function fot admin to choose the action
 def admin_choice():
+    print('')
     choice = input('''1. Add a new product\n2. Update product quantity
 3. Check all stock\n4.Exit\n\n''')
     print("\n" + "=" * 80)
@@ -558,9 +559,10 @@ the name and try again.''')
 
 # Function to get a new products name
 def product_name_info():
-    name = input('''Please enter the name of the product you want to add (e.g., "pork (kg)")\n''')
+    name = input('''Please enter the name of the product you want to add
+    (e.g., "pork (kg)")\n''')
     print("\n" + "=" * 80)
-    
+
     # Validate the name
     for char in name:
         if char.isdigit():
@@ -570,14 +572,13 @@ def product_name_info():
     if not name:
         print('Invalid name. Please enter a valid product name.\n')
         return product_name_info()
-    
+
     elif len(name) < 2 or len(name) > 20:
-        print('Invalid name length. Name should be between 2 and 20 characters.\n')
+        print('Invalid length. Name should be between 2 and 20 characters.\n')
         return product_name_info()
 
     # If none of the above conditions were met, the name is valid
     return name
-
 
 
 # Function to get a new products quantity
@@ -628,7 +629,7 @@ update the quantity of\n''')
     # Validate the product number
     if not (product.isdigit() and 1 <= int(product) <= len(columns)):
         print('You have entered an invalid number\n')
-        return get_number_to_update()
+        return get_number_to_update(columns)
     print("\n" + "=" * 80)
     return product
 
@@ -742,5 +743,3 @@ def main():
 # Run the main function
 if __name__ == "__main__":
     main()
-
-

@@ -180,6 +180,11 @@ My application comes packed with a range of features designed to enhance the use
 
    ![Features4](/readme_images/features_4.png)
 
+6. **Track the stock of products using Google Sheets**
+   ![Spreadsheet](/readme_images/spreadsheet.png)
+
+
+
 ### For Administrators
 
 1. **Inventory Management**
@@ -217,6 +222,7 @@ My application comes packed with a range of features designed to enhance the use
   - Ensure users are informed of any problems with their actions or inputs.
 
   ![Features11](/readme_images/features_11.png)
+
 
 ---
 ## Features Left to Implement
@@ -275,6 +281,14 @@ While my Online Grocery Store application already offers a robust set of functio
     * To deploy the project.
 * [CI Python Linter](https://pep8ci.herokuapp.com/)
     * Check code for any issues.
+* [Google Sheets](https://workspace.google.com/products/sheets/)
+    * To track the stock in online-store
+
+## Testing 
+
+CI Python Linter was used to test run.py
+
+
 
 
 
