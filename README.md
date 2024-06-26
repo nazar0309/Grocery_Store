@@ -293,6 +293,10 @@ While my Online Grocery Store application already offers a robust set of functio
 
 ### Manual testing
 
+The Grocery Store was manually tested extensively using Visual Stusio Code terminal, and once the website was deployed on Heroku it was manually tested again, during the creation of the code to the end.
+
+Here you can see the tables that I have created while testing: 
+
 
 
 
