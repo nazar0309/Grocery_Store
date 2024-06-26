@@ -113,7 +113,7 @@ def choose_dep_admin(case=None):
         print("\n" + "=" * 80)
         case = input('''Please, enter the department you want to add
 a product to \n\n1. Meat\n2. Dairy\n3. Vegetables
-\n4.Fruits\n5. Candies\n\n''')
+4. Fruits\n5. Candies\n\n''')
     dep = ''
     if case == '1':
         dep = 'meat'
@@ -511,7 +511,7 @@ def go_back():
 
 # Function fot admin to choose the action
 def admin_choice():
-    choice = input('''1. Add a new product\n2. Update product quantity\n
+    choice = input('''1. Add a new product\n2. Update product quantity
 3. Check all stock\n4.Exit\n\n''')
     print("\n" + "=" * 80)
     if choice == '1':
@@ -558,18 +558,26 @@ the name and try again.''')
 
 # Function to get a new products name
 def product_name_info():
-    name = input('''Please enter the name of the product you want to add
-(e.g., "pork (kg)")\n''')
+    name = input('''Please enter the name of the product you want to add (e.g., "pork (kg)")\n''')
     print("\n" + "=" * 80)
+    
     # Validate the name
-    if not name or len(name) < 2 or len(name) > 20:
+    for char in name:
+        if char.isdigit():
+            print('Invalid name. Name should contain alphabetic characters.\n')
+            return product_name_info()
+
+    if not name:
         print('Invalid name. Please enter a valid product name.\n')
-        print('Name should contain only be 2-20 characters long\n')
         return product_name_info()
-    elif name.isdigit():
-        print('Invalid name. Please enter a valid product name.\n')
+    
+    elif len(name) < 2 or len(name) > 20:
+        print('Invalid name length. Name should be between 2 and 20 characters.\n')
         return product_name_info()
+
+    # If none of the above conditions were met, the name is valid
     return name
+
 
 
 # Function to get a new products quantity
