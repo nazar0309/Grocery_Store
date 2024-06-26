@@ -236,25 +236,30 @@ def get_amount(columns, product):
     # Get the available quantity of the product
     available = int(columns[product][1])
     print("\n" + "=" * 80)
-    amount = int(input('''Please enter the amount
-of the product you want to add to your cart\n'''))
-    if amount > available:
-        print(f'''You have entered an invalid amount. We have only {available}
-items in stock\n''')
+    amount = input('''Please enter the amount
+of the product you want to add to your cart\n''')
+    if not (amount.isdigit() and 1 <= int(amount) <= available):
+        print('You have entered an invalid amount\n')
+        print(f'The available quantity of {columns[product][0]}: {available}')
         return get_amount(columns, product)
     else:
-        return amount
+        return int(amount)
+
+
+def get_product_number(columns):
+    print("\n" + "=" * 80)
+    product = input('''Please enter the number of the product you want to
+add to your cart:\n''')
+    if not (product.isdigit() and 1 <= int(product) <= len(columns)):
+        print('You have entered an invalid number\n')
+        return get_product_number(columns)
+    else:
+        return int(product) - 1
 
 
 # Function to add products to cart
 def add_to_cart(columns):
-    print("\n" + "=" * 80)
-    product = int(input('''Please enter the number of the product you want to
-add to your cart\n''')) - 1
-    # Validate the product number
-    if (product > len(columns) - 1) or (product < 0) or not product.isdigit():
-        print('You have entered an invalid number\n')
-        add_to_cart(columns)
+    product = get_product_number(columns)
     # Get the amount of the product
     amount = get_amount(columns, product)
     x = columns[product][0]
@@ -729,6 +734,5 @@ def main():
 # Run the main function
 if __name__ == "__main__":
     main()
-
 
 
