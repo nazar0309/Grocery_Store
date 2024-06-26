@@ -300,6 +300,8 @@ While my Online Grocery Store application already offers a robust set of functio
 
 
 
+
+
 # Deployment and local development
 
 ## Deploying to Heroku
