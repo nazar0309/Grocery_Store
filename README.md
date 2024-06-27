@@ -27,8 +27,6 @@ After checkout, we can continue shopping or leave the store
 ### [Fixed Bugs](#fixed-bugs-1)
 ### [Deployment](#deployment-1)
 * [Deployment to Heroku](#deployment-to-heroku)
-* [Forking the GitHub Repository](#forking-the-github-repository)
-* [Local Clone](#local-clone)
 ### [Credits](#credits-1)
 * [Code](#code)
 * [Content](#content)
