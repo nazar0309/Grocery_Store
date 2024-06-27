@@ -17,7 +17,6 @@ After checkout, we can continue shopping or leave the store
 ### [User Experience (UX)](#user-experience-ux-1)
 * [User Stories](#user-stories)
 ### [Features](#features-1)
-* [Existing Features](#existing-features)
 ### [Features Left to Implement](#features-left-to-implement-1)
 ### [Design](#design-1)
 ### [Technologies Used](#technologies-used-1)
@@ -295,14 +294,14 @@ While my Online Grocery Store application already offers a robust set of functio
 
 The Grocery Store was manually tested extensively using Visual Stusio Code terminal, and once the website was deployed on Heroku it was manually tested again, during the creation of the code to the end.
 
-[Here you can find tables that I had created while testing.](TABLES.md)
+[Here you can find tables that I had created while testing.](TESTING.md)
 
 
 ## Fixed bugs
 
 During the development and testing phases of the Grocery Store, several bugs were identified and resolved to ensure smooth functionality and an optimal user experience. 
 
-[Here you can find tables that I had created while fixing them.](TABLES.md)
+[Here you can find tables that I had created while fixing them.](TESTING.md)
 
 
 
@@ -325,59 +324,6 @@ To deploy with Heroku, Code Institute Python Essentials Template was used so the
 11. Scroll down and select either "Enable Automatic Deploys" or "Manual Deploy"
 12. Deployed site [Grocery Store](https://grocery-storee-12f87187c033.herokuapp.com/)
 
-
-
-## How to deploy on GitHub
-The website was deployed on GitHub Pages following these steps:
-
-1.Go to GitHub, navigate through Repository/settings/pages.<br>
-2.Select "main branch" in the source tab and click save.<br>
-3.The page should look like this, which includes the webpages address:<br>
-
-![Deployment_Github](/readme_images/deployment.png)
-
-
-## How to Fork and Clone a Project
-
-### Forking a Project
-
-1. **Sign in to GitHub**:
-   - Ensure you are logged into your GitHub account.
-
-2. **Navigate to the Repository**:
-   - Go to the repository you want to fork. You can use the search bar at the top of the GitHub homepage to find the repository.
-
-3. **Fork the Repository**:
-   - Click the "Fork" button in the top-right corner of the repository page.
-   - GitHub will create a copy of the repository in your account.
-
-### Cloning a Project
-
-1. **Navigate to Your Forked Repository**:
-   - Go to your GitHub profile and navigate to the forked repository.
-
-2. **Get the Repository URL**:
-   - Click the "Code" button on the repository page.
-   - Copy the URL from the HTTPS tab. It should look something like `https://github.com/your-username/repository.git`.
-
-3. **Open Your Terminal**:
-   - Open your terminal or command prompt.
-
-4. **Run the Git Clone Command**:
-   ```bash
-   git clone <repository-url>
-
-   Replace <repository-url> with the URL you copied. For example:
-   git clone https://github.com/your-username/repository.git
-   Navigate to the Cloned Repository:
-Once the cloning process is complete, navigate to the repository folder:
-cd repository
-Replace repository with the name of the cloned repository.
-
-
-
-
-Difference between clone and fork: "Forking creates your own copy of a repository in a remote location (for example, GitHub). Your own copy means that you will be able to contribute changes to your copy of the repository without affecting the original repository. Cloning makes a local copy of a repository, not your own copy." <a href="https://www.educative.io/answers/what-is-the-difference-between-forking-and-cloning-in-git">Full explanation</a><br>
 
 ## Credits
 
