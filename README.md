@@ -295,13 +295,14 @@ While my Online Grocery Store application already offers a robust set of functio
 
 The Grocery Store was manually tested extensively using Visual Stusio Code terminal, and once the website was deployed on Heroku it was manually tested again, during the creation of the code to the end.
 
-<a href = 'README.md'>Here you can find tables that I had created while testing.</a>
+[Here you can find tables that I had created while testing.](README.md)
+
 
 ## Fixed bugs
 
 During the development and testing phases of the Grocery Store, several bugs were identified and resolved to ensure smooth functionality and an optimal user experience. 
 
-<a href = 'README.md'>Here you can find tables that I had created while fixing them.</a>
+[Here you can find tables that I had created while fixing them.](README.md)
 
 
 
