@@ -334,7 +334,7 @@ The website was deployed on GitHub Pages following these steps:
 2.Select "main branch" in the source tab and click save.<br>
 3.The page should look like this, which includes the webpages address:<br>
 
-<img src="/assets/readme_images/deployment.png">
+![Deployment_Github](/readme_images/deployment.png)
 
 
 ## How to Fork and Clone a Project
