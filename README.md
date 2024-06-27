@@ -291,18 +291,17 @@ While my Online Grocery Store application already offers a robust set of functio
 
     ![CI_Python](/readme_images/ci_python.png)
 
-### Manual testing
+## Manual testing
 
 The Grocery Store was manually tested extensively using Visual Stusio Code terminal, and once the website was deployed on Heroku it was manually tested again, during the creation of the code to the end.
 
-<a href = 'README.md'>Here you can see the tables that I have created while testing </a>
+<a href = 'README.md'>Here you can find tables that I had created while testing.</a>
 
+## Fixed bugs
 
+During the development and testing phases of the Grocery Store, several bugs were identified and resolved to ensure smooth functionality and an optimal user experience. 
 
-
-
-
-
+<a href = 'README.md'>Here you can find tables that I had created while fixing them.</a>
 
 
 
